@@ -1,0 +1,78 @@
+// @import "~bootstrap/scss/bootstrap";
+@import "./config";
+@import "./mobile";
+$enable-responsive-font-sizes: true;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: $backg-color !important;
+}
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 72vh;
+}
+.NewPollContainer {
+  button {
+    background-color: $blue-color;
+  }
+}
+
+.JoinFormContainer {
+  button {
+    background-color: $turquoise-color;
+  }
+}
+hr.new1 {
+  visibility: hidden;
+}
+
+.verticalLine {
+  display: inline-block;
+  border-left: 2px solid gray;
+  margin: 3vw;
+  height: 30vw;
+}
+.graphSvg-1 {
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+  background-color: hsla(48, 100%, 67%, 0.2);
+  // background-color: hsla(328, 53%, 48%, 0.1);
+  bottom: 0;
+  right: 5vw;
+  z-index: -1;
+}
+.graphSvg-2 {
+  position: absolute;
+  width: 10vw;
+  height: 15vw;
+  background-color: hsla(171, 100%, 41%, 0.2);
+  bottom: 0;
+  right: 20vw;
+  z-index: -1;
+}
+.graphSvg-3 {
+  position: absolute;
+  width: 10vw;
+  height: 20vw;
+  background-color: hsla(204, 86%, 53%, 0.2);
+  bottom: 0;
+  right: 35vw;
+  z-index: -1;
+}
+footer {
+  font-size: small;
+  padding-top: 3rem;
+}
