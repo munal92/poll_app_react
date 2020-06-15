@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="page-footer fixed-bottom  py-3 ">
+    <footer className="page-footer position-relative py-5 ">
       <div className="footer-copyright text-center ">
         Copyright© 2020 | Created By{" "}
         <a href="https://www.linkedin.com/in/munal92/" target="_blank">
