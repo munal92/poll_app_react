@@ -5,6 +5,10 @@
   .homeContainer {
     padding-top: 3rem;
   }
+  footer {
+    font-size: small;
+    padding-top: 2rem;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -17,5 +21,9 @@
   }
   .verticalLine {
     display: none !important;
+  }
+  footer {
+    font-size: small;
+    padding-top: 3rem;
   }
 }

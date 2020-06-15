@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="page-footer ">
-      <div className="footer-copyright text-center py-3">
+    <footer className="page-footer fixed-bottom  py-3 ">
+      <div className="footer-copyright text-center ">
         Copyright© 2020 | Created By{" "}
         <a href="https://www.linkedin.com/in/munal92/" target="_blank">
           M.Fatih Unal

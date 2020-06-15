@@ -64,7 +64,7 @@ hr.new1 {
   z-index: -1;
 }
 .graphSvg-3 {
-  position: absolute;
+  position: fixed;
   width: 10vw;
   height: 20vw;
   background-color: hsla(204, 86%, 53%, 0.2);
@@ -74,5 +74,4 @@ hr.new1 {
 }
 footer {
   font-size: small;
-  padding-top: 3rem;
 }

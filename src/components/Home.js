@@ -13,8 +13,8 @@ const Home = () => {
             <NewPollForm />
           </Col>
           <Col md={2} sm={12} className="verticalLineCont">
-            <hr class="new1" />
-            <span class="verticalLine"></span>
+            <hr className="new1" />
+            <span className="verticalLine"></span>
           </Col>
           <Col md={5} sm={12}>
             <JoinForm />
