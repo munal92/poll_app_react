@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Route, useRouteMatch, Link } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 
 const PollResult = () => {
   const { itemID } = useParams();

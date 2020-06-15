@@ -1,29 +1,18 @@
 @media (max-width: 576px) {
-}
-
-@media (max-width: 900px) {
-  .homeContainer {
-    padding-top: 3rem;
-  }
-  footer {
-    font-size: small;
+  .footerSec {
     padding-top: 2rem;
   }
 }
 
+@media (max-width: 900px) {
+}
+
 // Medium devices (tablets, 768px and up)
 @media (max-width: 767px) {
-  .homeContainer {
-    padding-top: 3rem;
-  }
   hr.new1 {
     visibility: visible !important;
   }
   .verticalLine {
     display: none !important;
-  }
-  footer {
-    font-size: small;
-    padding-top: 3rem;
   }
 }

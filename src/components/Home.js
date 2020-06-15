@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <section className="homeContainer">
       <Container>
-        <Row className=" align-items-center">
+        <Row className="align-items-center">
           <Col md={5} sm={12}>
             <NewPollForm />
           </Col>
@@ -29,22 +29,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{
-  /* <section className="container  ">
-      <div class="row  h-100 ">
-        <div class="col-5 my-auto ">
-          <NewPollForm />
-        </div>
-        <div class="col-md-auto my-auto">
-          <span class="vertical-line"></span>
-        </div>
-        <div class="col-5">
-          <JoinForm />
-        </div>
-      </div>
-      <div className="graphSvg-1"></div>
-      <div className="graphSvg-2"></div>
-      <div className="graphSvg-3"></div>
-    </section> */
-}
