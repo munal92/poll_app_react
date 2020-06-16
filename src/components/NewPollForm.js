@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosHelper from "./utils/axiosHelper";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -46,29 +46,23 @@ const NewPollForm = () => {
   }
 
   const handleIDs = (id) => {
-    console.log("poll_id", id, "\nfields", fields);
     fields.map((item) => (item.poll_id = id));
   };
   const submitPollForm = (e) => {
     e.preventDefault();
     let createdPollID;
 
-    axios
-      .post(
-        `https://poll--app.herokuapp.com/api/poll/createpoll`,
-        newPollQuestion
-      )
+    axiosHelper()
+      .post(`/poll/createpoll`, newPollQuestion)
       .then((res) => {
-        console.log("question data", res.data);
         createdPollID = res.data.poll_link;
-        console.log("ICINDE", createdPollID);
+
         handleIDs(res.data.id);
 
         fields.map((val) =>
-          axios
-            .post("https://poll--app.herokuapp.com/api/poll/createanswer", val)
+          axiosHelper()
+            .post("/poll/createanswer", val)
             .then((r) => {
-              console.log("answer data", r);
               history.push(`/poll/${createdPollID}`);
             })
             .catch((er) => {
@@ -79,12 +73,8 @@ const NewPollForm = () => {
       .catch((err) => {
         console.log("error question post", err);
       });
-    console.log("Nerde", createdPollID);
-    console.log(`/poll/${createdPollID}`);
   };
-  //console.log("poll_question", newPollQuestion);
-  // console.log("poll answers", newPollAnswers);
-  // console.log("fields", fields, fields.length);
+
   return (
     <div className="NewPollContainer">
       <Form>
