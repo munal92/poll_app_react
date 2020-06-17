@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosHelper from "./utils/axiosHelper";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PollAnswers from "./PollResultsSec/PollAnswers";
 import PollGraph from "./PollResultsSec/PollGraph";
 import Container from "react-bootstrap/Container";
@@ -10,14 +10,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const PollResult = () => {
   const { itemID } = useParams();
-  const { path, url } = useRouteMatch();
+  // const { path, url } = useRouteMatch();
   const [poll, setPoll] = useState([]);
   const [apiStatus, setApiStatus] = useState(false);
   const [copyLink, setCopyLink] = useState({
     value: window.location.href,
     copied: false,
   });
-  // console.log("url ", url, "\npath ", path);
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,7 +31,6 @@ const PollResult = () => {
           .get(`/poll/${itemID}`)
           // .get(`/poll/09876`)
           .then((res) => {
-            console.log("ilk data", res);
             setPoll(res.data);
             setApiStatus(true);
           })

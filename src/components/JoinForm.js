@@ -17,7 +17,6 @@ const JoinForm = (props) => {
     history.push(`/poll/${pollLink.poll_link}`);
   };
 
-  console.log(pollLink);
   return (
     <div className="JoinFormContainer">
       <Form>

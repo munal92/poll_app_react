@@ -10,12 +10,6 @@ const NewPollForm = () => {
   const [newPollQuestion, setNewPollQuestion] = useState({
     poll_question: "",
   });
-  const [newPollAnswers, setNewPollAnswers] = useState([
-    {
-      poll_answer: "",
-      poll_id: 0,
-    },
-  ]);
 
   const [fields, setFields] = useState([{ poll_answer: "", poll_id: 0 }]);
 
@@ -105,7 +99,7 @@ const NewPollForm = () => {
                 <Form.Control
                   className="mb-3"
                   name="poll_answer"
-                  onChange={handleAnswersChange}
+                  // onChange={handleAnswersChange}
                   value={field.poll_answer || ""}
                   onChange={(e) => handleAnswersChange(idx, e)}
                   type="text"

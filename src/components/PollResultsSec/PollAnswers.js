@@ -5,7 +5,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import Alert from "react-bootstrap/Alert";
+
 const PollAnswers = (props) => {
   const [answersData, setanswersData] = useState([{}]);
   const [isRChecked, setIsRChecked] = useState(100);
@@ -32,31 +32,21 @@ const PollAnswers = (props) => {
   const handleRadio = (e) => {
     e.persist();
     setIsRChecked(e.target.value);
-
-    // console.log("radio ", e.target.value);
   };
 
   const submitAnswer = (e) => {
     e.preventDefault();
-    console.log("answer axios url ", `/poll/answer/${isRChecked}`);
+
     axiosHelper()
       .put(`/poll/answer/${isRChecked}`)
       .then((res) => {
-        console.log("res ", res);
         props.setApiStatus(false);
       })
       .catch((err) => {
         console.log("err PollAnswers ", err);
       });
-
-    // console.log("radio ", e.target.value);
   };
-  //console.log("isRcheck ", isRChecked);
-  //console.log("answerData", voteCalc);
-  // const handleCopyClipboard = (e) => {
-  //   e.preventDefault();
 
-  // };
   return (
     <Form>
       <Form.Text className="font-weight-bold h4 pb-3">
@@ -114,7 +104,6 @@ const PollAnswers = (props) => {
               position: props.toast.POSITION.TOP_CENTER,
             })
           }
-          onclickclassName="mx-4"
           size="md"
         >
           {" "}

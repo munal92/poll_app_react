@@ -9,10 +9,7 @@ const PollGraph = (props) => {
       setGraphData(props.poll.answers);
     }
   }, [props]);
-  console.log(
-    "graphData",
-    graphData.map((item) => item)
-  );
+
   const data = {
     labels: graphData.map((item) => item.poll_answer),
     datasets: [

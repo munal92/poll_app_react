@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container">
         <div>
           Copyright© 2020 | Created By{" "}
-          <a href="https://www.linkedin.com/in/munal92/" target="_blank">
+          <a href="https://www.linkedin.com/in/munal92/" target="blank">
             M.Fatih Unal
           </a>
           <br />
