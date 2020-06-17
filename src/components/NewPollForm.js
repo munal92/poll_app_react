@@ -88,7 +88,7 @@ const NewPollForm = () => {
       return res;
     }
   };
-  console.log("error question post", fields);
+
   return (
     <div className="NewPollContainer">
       <Form>
