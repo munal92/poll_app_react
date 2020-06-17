@@ -21,11 +21,11 @@ const PollResult = () => {
   useEffect(() => {
     setTimeout(() => {
       fetchApi();
-    }, 1000);
+    }, 2000);
   });
 
   const fetchApi = () => {
-    if (!apiStatus) {
+    if (true) {
       try {
         axiosHelper()
           .get(`/poll/${itemID}`)
