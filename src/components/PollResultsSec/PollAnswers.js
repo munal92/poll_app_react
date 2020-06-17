@@ -12,7 +12,10 @@ const PollAnswers = (props) => {
 
   useEffect(() => {
     if (props.apiStatus) {
-      setanswersData(props.poll.answers);
+      let values = props.poll.answers;
+      values.sort((a, b) => (a.order_id > b.order_id ? 1 : -1));
+
+      setanswersData(values);
     }
   }, [props]);
   let backgroundColor = [

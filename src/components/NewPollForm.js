@@ -11,7 +11,16 @@ const NewPollForm = () => {
     poll_question: "",
   });
 
-  const [fields, setFields] = useState([{ poll_answer: "", poll_id: 0 }]);
+  const [fields, setFields] = useState([
+    { poll_answer: "", poll_id: 0, order_id: 0 },
+  ]);
+  // const [fields, setFields] = useState([
+  //   { poll_answer: "lalaallaasddsaaaaaaaddaqwe1", poll_id: 0 },
+  //   { poll_answer: "2", poll_id: 0 },
+  //   { poll_answer: "lasldasdlsadsaddddddddddaqw?3", poll_id: 0 },
+  //   { poll_answer: "yes its HAS 4", poll_id: 0 },
+  //   { poll_answer: "5", poll_id: 0 },
+  // ]);
 
   const handleQuestionChange = (e) => {
     e.persist();
@@ -27,7 +36,7 @@ const NewPollForm = () => {
   function handleAdd() {
     if (fields.length !== 6) {
       const values = [...fields];
-      values.push({ poll_answer: null, poll_id: 0 });
+      values.push({ poll_answer: null, poll_id: 0, order_id: 0 });
       setFields(values);
     }
   }
@@ -40,7 +49,7 @@ const NewPollForm = () => {
   }
 
   const handleIDs = (id) => {
-    fields.map((item) => (item.poll_id = id));
+    fields.map((item, index) => ((item.poll_id = id), (item.order_id = index)));
   };
   const submitPollForm = (e) => {
     e.preventDefault();
@@ -52,23 +61,34 @@ const NewPollForm = () => {
         createdPollID = res.data.poll_link;
 
         handleIDs(res.data.id);
+        fields.map((val) => {
+          console.log("val", val);
 
-        fields.map((val) =>
-          axiosHelper()
-            .post("/poll/createanswer", val)
-            .then((r) => {
-              history.push(`/poll/${createdPollID}`);
-            })
-            .catch((er) => {
-              console.log("error answer post", er);
-            })
-        );
+          makePostRequest(val);
+        });
+        history.push(`/poll/${createdPollID}`);
       })
+
       .catch((err) => {
         console.log("error question post", err);
       });
-  };
+    //  fields.map((val) =>
+    //     axiosHelper()
+    //       .post("/poll/createanswer", val)
+    //       .then((r) => {
+    //         //history.push(`/poll/${createdPollID}`);
+    //       })
+    //       .catch((er) => {
+    //         console.log("error answer post", er);
+    //       })
+    //   );
 
+    async function makePostRequest(val2) {
+      let res = await axiosHelper().post("/poll/createanswer", val2);
+      return res;
+    }
+  };
+  console.log("error question post", fields);
   return (
     <div className="NewPollContainer">
       <Form>
