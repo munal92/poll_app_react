@@ -1,17 +1,14 @@
 @media (max-width: 576px) {
+  .footerSec {
+    padding-top: 2rem;
+  }
 }
 
 @media (max-width: 900px) {
-  .homeContainer {
-    padding-top: 3rem;
-  }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 767px) {
-  .homeContainer {
-    padding-top: 3rem;
-  }
   hr.new1 {
     visibility: visible !important;
   }

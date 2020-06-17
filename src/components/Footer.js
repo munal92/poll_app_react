@@ -2,16 +2,18 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="page-footer ">
-      <div className="footer-copyright text-center py-3">
-        Copyright© 2020 | Created By{" "}
-        <a href="https://www.linkedin.com/in/munal92/" target="_blank">
-          M.Fatih Unal
-        </a>
-        <br />
-        All Rights Reserved®
+    <section className="footerSec text-center my-4   small">
+      <div className="container">
+        <div>
+          Copyright© 2020 | Created By{" "}
+          <a href="https://www.linkedin.com/in/munal92/" target="blank">
+            M.Fatih Unal
+          </a>
+          <br />
+          All Rights Reserved®
+        </div>
       </div>
-    </footer>
+    </section>
   );
 };
 
