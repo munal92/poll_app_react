@@ -10,6 +10,11 @@ const PollGraph = (props) => {
     }
   }, [props]);
 
+  let voteCalc = graphData.reduce(
+    (totalAnswerCount, count) => totalAnswerCount + count.answer_count,
+    0
+  );
+
   const data = {
     labels: graphData.map((item) => item.poll_answer),
     datasets: [
@@ -36,10 +41,26 @@ const PollGraph = (props) => {
       },
     ],
   };
+
+  const NoData = {
+    labels: ["Graph will get update after first vote"],
+    datasets: [
+      {
+        data: [1],
+        backgroundColor: ["#f0f0f0"],
+        hoverBackgroundColor: ["#d3d3d3"],
+      },
+    ],
+  };
+  console.log(voteCalc);
   return (
     <div>
-      <h2>Answers Pie Chart</h2>
-      <Pie width={700} height={600} data={data} />
+      {/* <h2>Answers Pie Chart</h2> */}
+      {voteCalc === 0 ? (
+        <Pie width={700} height={600} data={NoData} />
+      ) : (
+        <Pie width={700} height={600} data={data} />
+      )}
     </div>
   );
 };

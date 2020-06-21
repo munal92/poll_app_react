@@ -5,7 +5,8 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+
 const PollAnswers = (props) => {
   const [answersData, setanswersData] = useState([{}]);
   const [isRChecked, setIsRChecked] = useState(100);
@@ -70,7 +71,7 @@ const PollAnswers = (props) => {
       <Form.Group>
         {answersData.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="pb-3">
               <h6>{item.poll_answer}</h6>
               <Form.Row className="align-items-center  ">
                 <Col xs={1}>
@@ -104,14 +105,18 @@ const PollAnswers = (props) => {
             </div>
           );
         })}
+        <p className="testText text-right font-italic font-weight-lighter pb-0 mb-0">
+          {voteCalc} votes recorded
+        </p>
       </Form.Group>
+
       <Form.Row>
-        <Col xs={2}>
+        <Form.Group className="pr-3">
           <Button onClick={submitAnswer} size="md" type="submit">
             Vote
           </Button>
-        </Col>
-        <Col xs={2}>
+        </Form.Group>
+        <Form.Group>
           <CopyToClipboard
             text={props.copyLink.value}
             onCopy={() => props.setCopyLink({ copied: true })}
@@ -133,20 +138,11 @@ const PollAnswers = (props) => {
               }
               size="md"
             >
-              {" "}
               Share
             </Button>
           </CopyToClipboard>
-        </Col>
-        <Col xs={8}>
-          <p className="text-right">{voteCalc} votes recorded</p>
-        </Col>
+        </Form.Group>
       </Form.Row>
-      {/* style={{
-          color: "gray",
-          fontStyle: "italic",
-        }}
-      > */}
     </Form>
   );
 };
