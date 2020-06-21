@@ -8,3 +8,8 @@
     background-color: $blue-color;
   }
 }
+
+.testText {
+  font-size: 0.8em;
+  //@include font-size(6px);
+}
