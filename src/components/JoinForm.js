@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
+import axiosHelper from "./utils/axiosHelper";
 const JoinForm = (props) => {
   const history = useHistory();
 
   const [pollLink, setPollLink] = useState({ poll_link: "" });
+
+  const [formValidation, setFormValidation] = useState({
+    validated: false,
+    notValidIdMessage: "Enter a valid poll id please!",
+    apiFetch: false,
+  });
 
   const handleChange = (e) => {
     e.persist();
@@ -14,34 +21,50 @@ const JoinForm = (props) => {
 
   const submitFindPoll = (e) => {
     e.preventDefault();
-    history.push(`/poll/${pollLink.poll_link}`);
+    setFormValidation({ ...formValidation, apiFetch: true });
+    axiosHelper()
+      .get(`/poll/${pollLink.poll_link}`)
+      // .get(`/poll/09876`)
+      .then((res) => {
+        setFormValidation({ ...formValidation, apiFetch: false });
+        history.push(`/poll/${pollLink.poll_link}`);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        setFormValidation({
+          ...formValidation,
+          validated: true,
+          apiFetch: false,
+        });
+        setPollLink({ ...pollLink, poll_link: "" });
+      });
   };
 
   return (
     <div className="JoinFormContainer">
-      <Form>
+      <Form noValidate validated={formValidation.validated}>
         <Form.Group controlId="formBasicText">
           <Form.Text className="font-weight-bold h3 py-3">
-            Looking for a{" "}
+            Looking for a
             <span style={{ fontSize: "1.3em", color: "#00d1b2" }}> Poll? </span>
           </Form.Text>
 
           <Form.Control
+            required
             name="poll_link"
             onChange={handleChange}
             size="lg"
             type="text"
             placeholder="#Enter Poll Code"
+            value={pollLink.poll_link}
           />
+          <Form.Control.Feedback type="invalid">
+            {formValidation.notValidIdMessage}
+          </Form.Control.Feedback>
         </Form.Group>
 
-        <Button
-          onClick={submitFindPoll}
-          variant="success"
-          size="lg"
-          type="submit"
-        >
-          Find a Poll
+        <Button onClick={submitFindPoll} variant="info" size="lg" type="submit">
+          {formValidation.apiFetch ? "Checking..." : "Find a Poll"}
         </Button>
       </Form>
     </div>
