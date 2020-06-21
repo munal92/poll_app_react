@@ -4,6 +4,7 @@ import Navigbar from "./components/NavigBar";
 import Footer from "./components/Footer";
 import { Switch, Route } from "react-router-dom";
 import PollResult from "./components/PollResult";
+import { ToastContainer, toast } from "react-toastify";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <ToastContainer />
     </>
   );
 }

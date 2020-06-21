@@ -5,7 +5,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-
+import { ToastContainer, toast } from "react-toastify";
 const PollAnswers = (props) => {
   const [answersData, setanswersData] = useState([{}]);
   const [isRChecked, setIsRChecked] = useState(100);
@@ -23,8 +23,8 @@ const PollAnswers = (props) => {
     "info",
     "warning",
     "danger",
-    "dark",
     "primary",
+    "dark",
   ];
 
   let voteCalc = answersData.reduce(
@@ -39,15 +39,27 @@ const PollAnswers = (props) => {
 
   const submitAnswer = (e) => {
     e.preventDefault();
-
-    axiosHelper()
-      .put(`/poll/answer/${isRChecked}`)
-      .then((res) => {
-        props.setApiStatus(false);
-      })
-      .catch((err) => {
-        console.log("err PollAnswers ", err);
+    if (window.localStorage.getItem("pollid") !== props.poll.poll_link) {
+      axiosHelper()
+        .put(`/poll/answer/${isRChecked}`)
+        .then((res) => {
+          // props.setApiStatus(false);
+          window.localStorage.setItem("pollid", props.poll.poll_link);
+        })
+        .catch((err) => {
+          console.log("err PollAnswers ", err);
+        });
+    } else {
+      toast.info("🗳️ You have already voted.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
+    }
   };
 
   return (
@@ -93,26 +105,48 @@ const PollAnswers = (props) => {
           );
         })}
       </Form.Group>
-      <Button onClick={submitAnswer} size="md" type="submit">
-        Vote
-      </Button>
-      <CopyToClipboard
-        text={props.copyLink.value}
-        onCopy={() => props.setCopyLink({ copied: true })}
-      >
-        <Button
-          className="mx-4"
-          onClick={() =>
-            props.toast.success(`Link Copied!`, {
-              position: props.toast.POSITION.TOP_CENTER,
-            })
-          }
-          size="md"
-        >
-          {" "}
-          Share
-        </Button>
-      </CopyToClipboard>
+      <Form.Row>
+        <Col xs={2}>
+          <Button onClick={submitAnswer} size="md" type="submit">
+            Vote
+          </Button>
+        </Col>
+        <Col xs={2}>
+          <CopyToClipboard
+            text={props.copyLink.value}
+            onCopy={() => props.setCopyLink({ copied: true })}
+          >
+            <Button
+              onClick={() =>
+                // props.toast.success(`📋 Link Copied!`, {
+                //   position: props.toast.POSITION.TOP_CENTER,
+                // })
+                props.toast.success("📋 Link Copied!", {
+                  position: "top-center",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                })
+              }
+              size="md"
+            >
+              {" "}
+              Share
+            </Button>
+          </CopyToClipboard>
+        </Col>
+        <Col xs={8}>
+          <p className="text-right">{voteCalc} votes recorded</p>
+        </Col>
+      </Form.Row>
+      {/* style={{
+          color: "gray",
+          fontStyle: "italic",
+        }}
+      > */}
     </Form>
   );
 };

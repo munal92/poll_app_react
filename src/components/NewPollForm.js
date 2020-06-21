@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 const NewPollForm = () => {
   const history = useHistory();
+
   const [newPollQuestion, setNewPollQuestion] = useState({
     poll_question: "",
   });
@@ -14,6 +15,13 @@ const NewPollForm = () => {
   const [fields, setFields] = useState([
     { poll_answer: "", poll_id: 0, order_id: 0 },
   ]);
+
+  const [formValidation, setFormValidation] = useState({
+    validated: false,
+    notValidIdMessage: "Enter a question please!",
+    notValidIdMessage2: "Enter a answer please!",
+    apiFetch: false,
+  });
   // const [fields, setFields] = useState([
   //   { poll_answer: "lalaallaasddsaaaaaaaddaqwe1", poll_id: 0 },
   //   { poll_answer: "2", poll_id: 0 },
@@ -53,61 +61,79 @@ const NewPollForm = () => {
   };
   const submitPollForm = (e) => {
     e.preventDefault();
-    let createdPollID;
+    if (newPollQuestion.poll_question !== "" && fields[0].poll_answer !== "") {
+      let createdPollID;
+      setFormValidation({ ...formValidation, apiFetch: true });
+      axiosHelper()
+        .post(`/poll/createpoll`, newPollQuestion)
+        .then((res) => {
+          createdPollID = res.data.poll_link;
 
-    axiosHelper()
-      .post(`/poll/createpoll`, newPollQuestion)
-      .then((res) => {
-        createdPollID = res.data.poll_link;
+          handleIDs(res.data.id);
+          fields.map((val) => {
+            console.log("val", val);
 
-        handleIDs(res.data.id);
-        fields.map((val) => {
-          console.log("val", val);
+            makePostRequest(val);
+          });
+          setFormValidation({ ...formValidation, apiFetch: false });
+          history.push(`/poll/${createdPollID}`);
+        })
 
-          makePostRequest(val);
+        .catch((err) => {
+          console.log("error question post", err);
+          setFormValidation({
+            ...formValidation,
+            validated: true,
+            apiFetch: false,
+          });
         });
-        history.push(`/poll/${createdPollID}`);
-      })
+      //  fields.map((val) =>
+      //     axiosHelper()
+      //       .post("/poll/createanswer", val)
+      //       .then((r) => {
+      //         //history.push(`/poll/${createdPollID}`);
+      //       })
+      //       .catch((er) => {
+      //         console.log("error answer post", er);
+      //       })
+      //   );
 
-      .catch((err) => {
-        console.log("error question post", err);
+      async function makePostRequest(val2) {
+        let res = await axiosHelper().post("/poll/createanswer", val2);
+        return res;
+      }
+    } else {
+      setFormValidation({
+        ...formValidation,
+        validated: true,
+        apiFetch: false,
       });
-    //  fields.map((val) =>
-    //     axiosHelper()
-    //       .post("/poll/createanswer", val)
-    //       .then((r) => {
-    //         //history.push(`/poll/${createdPollID}`);
-    //       })
-    //       .catch((er) => {
-    //         console.log("error answer post", er);
-    //       })
-    //   );
-
-    async function makePostRequest(val2) {
-      let res = await axiosHelper().post("/poll/createanswer", val2);
-      return res;
     }
   };
 
   return (
     <div className="NewPollContainer">
-      <Form>
+      <Form noValidate validated={formValidation.validated}>
         <Form.Text className="font-weight-bold h3 pb-3">
-          Create a
-          <span className="font-weight-bold h1" style={{ color: "#209cee" }}>
-            {" "}
+          Create a{" "}
+          <span style={{ fontSize: "1.3em", color: "#209cee" }}>
+            {/* className="font-weight-bold h1" */}
             Poll
           </span>
         </Form.Text>
         <Form.Group controlId="formBasicText">
           <Form.Label className="font-weight-bold h5">Question:</Form.Label>
           <Form.Control
+            required
             name="poll_question"
             onChange={handleQuestionChange}
             size="lg"
             type="text"
             placeholder="Type a question"
           />
+          <Form.Control.Feedback type="invalid">
+            {formValidation.notValidIdMessage}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group controlId="formBasicText">
@@ -117,6 +143,7 @@ const NewPollForm = () => {
             return (
               <InputGroup key={`${field}-${idx}`}>
                 <Form.Control
+                  required
                   className="mb-3"
                   name="poll_answer"
                   // onChange={handleAnswersChange}
@@ -125,6 +152,7 @@ const NewPollForm = () => {
                   type="text"
                   placeholder={`Type answer ${idx + 1}`}
                 />
+
                 {fields.length !== 1 ? (
                   <Button
                     onClick={() => handleRemove()}
@@ -149,6 +177,9 @@ const NewPollForm = () => {
                 >
                   +
                 </Button> */}
+                <Form.Control.Feedback type="invalid">
+                  {formValidation.notValidIdMessage2}
+                </Form.Control.Feedback>
               </InputGroup>
             );
           })}
@@ -176,7 +207,7 @@ const NewPollForm = () => {
         </Form.Group>
 
         <Button onClick={submitPollForm} size="lg" type="submit">
-          Create Poll
+          {formValidation.apiFetch ? "Creating..." : "Create Poll"}
         </Button>
       </Form>
     </div>
