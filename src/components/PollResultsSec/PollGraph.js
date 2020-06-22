@@ -21,20 +21,20 @@ const PollGraph = (props) => {
       {
         data: graphData.map((item) => item.answer_count),
         backgroundColor: [
-          "#209cee",
-          "#00d1b2",
-          "#ffdd57",
-          "#3273dc",
-          "#23d160",
-          "#ff3860",
+          "#5cb85c",
+          "#FF6384",
+          "#4BC0C0",
+          "#FFCD56",
+          "#36A2EB",
+          "#292b2c",
         ],
         hoverBackgroundColor: [
-          "#209cee",
-          "#23d160",
-          "#ffdd57",
-          "#3273dc",
-          "#00d1b2",
-          "#ff3860",
+          "#46a046",
+          "#ff1a4b",
+          "#2e8484",
+          "#ffba1a",
+          "#0b4a74",
+          "#000000",
         ],
         //   backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         //   hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
@@ -52,7 +52,7 @@ const PollGraph = (props) => {
       },
     ],
   };
-  console.log(voteCalc);
+
   return (
     <div>
       {/* <h2>Answers Pie Chart</h2> */}
