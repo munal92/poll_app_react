@@ -71,8 +71,6 @@ const NewPollForm = () => {
 
           handleIDs(res.data.id);
           fields.map((val) => {
-            console.log("val", val);
-
             makePostRequest(val);
           });
           setFormValidation({ ...formValidation, apiFetch: false });
@@ -80,7 +78,7 @@ const NewPollForm = () => {
         })
 
         .catch((err) => {
-          console.log("error question post", err);
+          console.error("error question post", err);
           setFormValidation({
             ...formValidation,
             validated: true,
@@ -114,7 +112,7 @@ const NewPollForm = () => {
   return (
     <div className="NewPollContainer">
       <Form noValidate validated={formValidation.validated}>
-        <Form.Text className="font-weight-bold h3 pb-3">
+        <Form.Text className="font-weight-bold h3 pb-3 mb-3 ">
           Create a{" "}
           <span style={{ fontSize: "1.3em", color: "#209cee" }}>
             {/* className="font-weight-bold h1" */}
@@ -124,6 +122,7 @@ const NewPollForm = () => {
         <Form.Group controlId="formBasicText">
           <Form.Label className="font-weight-bold h5">Question:</Form.Label>
           <Form.Control
+            className="shadow-sm bg-white rounded"
             required
             name="poll_question"
             onChange={handleQuestionChange}
@@ -144,7 +143,7 @@ const NewPollForm = () => {
               <InputGroup key={`${field}-${idx}`}>
                 <Form.Control
                   required
-                  className="mb-3"
+                  className="mb-3 shadow-sm bg-white rounded"
                   name="poll_answer"
                   // onChange={handleAnswersChange}
                   value={field.poll_answer || ""}
@@ -156,7 +155,7 @@ const NewPollForm = () => {
                 {fields.length !== 1 ? (
                   <Button
                     onClick={() => handleRemove()}
-                    className="mb-3 "
+                    className="mb-3 shadow-sm bg-white rounded"
                     as={InputGroup.Append}
                     style={{
                       backgroundColor: "#f9f8f8",

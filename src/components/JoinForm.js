@@ -30,7 +30,7 @@ const JoinForm = (props) => {
         history.push(`/poll/${pollLink.poll_link}`);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.error("err", err);
         setFormValidation({
           ...formValidation,
           validated: true,
@@ -41,7 +41,7 @@ const JoinForm = (props) => {
   };
 
   return (
-    <div className="JoinFormContainer">
+    <div className="JoinFormContainer ">
       <Form noValidate validated={formValidation.validated}>
         <Form.Group controlId="formBasicText">
           <Form.Text className="font-weight-bold h3 py-3">
@@ -50,12 +50,13 @@ const JoinForm = (props) => {
           </Form.Text>
 
           <Form.Control
+            className="shadow-sm bg-white rounded"
             required
             name="poll_link"
             onChange={handleChange}
             size="lg"
             type="text"
-            placeholder="#Enter Poll Code"
+            placeholder="Enter a Poll ID"
             value={pollLink.poll_link}
           />
           <Form.Control.Feedback type="invalid">

@@ -4,8 +4,15 @@
   justify-content: center;
   align-items: center;
   min-height: 72vh;
-  button {
+  .shareBtn {
+    background-color: $turquoise-color;
+    border-color: $turquoise-color;
+  }
+
+  .voteBtn {
     background-color: $blue-color;
+    border-color: $blue-color;
+    width: 110%;
   }
 }
 

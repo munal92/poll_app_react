@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { toast } from "react-toastify";
+import { faShareSquare, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PollAnswers = (props) => {
   const [answersData, setanswersData] = useState([{}]);
@@ -21,9 +23,9 @@ const PollAnswers = (props) => {
   }, [props]);
   let backgroundColor = [
     "success",
+    "danger",
     "info",
     "warning",
-    "danger",
     "primary",
     "dark",
   ];
@@ -48,7 +50,7 @@ const PollAnswers = (props) => {
           window.localStorage.setItem("pollid", props.poll.poll_link);
         })
         .catch((err) => {
-          console.log("err PollAnswers ", err);
+          console.error("err", err);
         });
     } else {
       toast.info("🗳️ You have already voted.", {
@@ -65,7 +67,7 @@ const PollAnswers = (props) => {
 
   return (
     <Form>
-      <Form.Text className="font-weight-bold h4 pb-3">
+      <Form.Text className="font-weight-bold h4 pb-4 pt-2">
         Q: {props.poll.poll_question}
       </Form.Text>
       <Form.Group>
@@ -105,14 +107,27 @@ const PollAnswers = (props) => {
             </div>
           );
         })}
-        <p className="testText text-right font-italic font-weight-lighter pb-0 mb-0">
-          {voteCalc} votes recorded
+        <p className="testText text-right font-weight-normal py-0 my-0">
+          🗳️
+          <span className="font-italic font-weight-normal">
+            {" "}
+            {voteCalc} votes recorded
+          </span>
+        </p>
+        <p className="testText text-right font-weight-normal py-0 my-0">
+          🆔 {props.poll.poll_link}
         </p>
       </Form.Group>
 
       <Form.Row>
-        <Form.Group className="pr-3">
-          <Button onClick={submitAnswer} size="md" type="submit">
+        <Form.Group className="pr-3 ">
+          <Button
+            className="voteBtn"
+            onClick={submitAnswer}
+            size="md"
+            type="submit"
+          >
+            <FontAwesomeIcon className="mr-2" icon={faPoll} />
             Vote
           </Button>
         </Form.Group>
@@ -136,8 +151,11 @@ const PollAnswers = (props) => {
                   progress: undefined,
                 })
               }
+              className="shareBtn"
               size="md"
+              variant="info"
             >
+              <FontAwesomeIcon className="mr-2" icon={faShareSquare} />
               Share
             </Button>
           </CopyToClipboard>

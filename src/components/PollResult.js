@@ -39,7 +39,7 @@ const PollResult = () => {
             setApiStatus(true);
           })
           .catch((err) => {
-            console.log("err", err);
+            console.error("err", err);
 
             toast.error(`Poll not exist.\n Redirecting to the home page... `, {
               position: toast.POSITION.TOP_CENTER,
@@ -60,14 +60,14 @@ const PollResult = () => {
       <Container>
         {!apiStatus ? (
           <Container>
-            <Row className="align-items-center justify-content-center">
-              <h3>Loading...</h3>
+            <Row className="align-items-center justify-content-center mb-2">
+              <h4>Loading...</h4>
             </Row>
             <Row className="align-items-center justify-content-center">
               <Spinner animation="grow" variant="success" />
               <Spinner animation="grow" variant="danger" />
-              <Spinner animation="grow" variant="warning" />
               <Spinner animation="grow" variant="info" />
+              <Spinner animation="grow" variant="warning" />
             </Row>
           </Container>
         ) : (

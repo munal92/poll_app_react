@@ -5,7 +5,7 @@ import PollAppTxt from "../img/PollApp.svg";
 const NavigBar = () => {
   return (
     <header>
-      <Navbar className="navbar-expand-lg px-md-5 mx-md-5">
+      <Navbar className="navbar-expand-lg px-md-5 mx-md-5 ">
         <Navbar.Brand href="/">
           <img alt="" src={Logo} className="d-inline-block align-top" />
         </Navbar.Brand>
