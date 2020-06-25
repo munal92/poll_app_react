@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import axiosHelper from "./utils/axiosHelper";
+import ReactGa from "react-ga";
 const JoinForm = (props) => {
   const history = useHistory();
 
@@ -21,6 +22,10 @@ const JoinForm = (props) => {
 
   const submitFindPoll = (e) => {
     e.preventDefault();
+    ReactGa.event({
+      category: `Find Poll button`,
+      action: `User clicked of Find Poll`,
+    });
     setFormValidation({ ...formValidation, apiFetch: true });
     axiosHelper()
       .get(`/poll/${pollLink.poll_link}`)

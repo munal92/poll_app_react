@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
+import ReactGa from "react-ga";
 const NewPollForm = () => {
   const history = useHistory();
 
@@ -61,6 +62,10 @@ const NewPollForm = () => {
   };
   const submitPollForm = (e) => {
     e.preventDefault();
+    ReactGa.event({
+      category: `Create Poll button`,
+      action: `User clicked of Create Poll`,
+    });
     if (newPollQuestion.poll_question !== "" && fields[0].poll_answer !== "") {
       let createdPollID;
       setFormValidation({ ...formValidation, apiFetch: true });
