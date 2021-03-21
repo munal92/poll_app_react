@@ -1,2 +1,1 @@
-# poll_add_react
-React app for poll app
+# poll_app_react
