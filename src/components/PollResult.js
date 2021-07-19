@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
-import MetaTags from "react-meta-tags";
 const PollResult = () => {
   const history = useHistory();
   const { itemID } = useParams();
@@ -54,8 +53,6 @@ const PollResult = () => {
         throw err;
       }
     }
-
-    console.log("New", poll.poll_question);
   };
 
   return (
@@ -99,9 +96,6 @@ const PollResult = () => {
       <div className="graphSvg-1"></div>
       <div className="graphSvg-2"></div>
       <div className="graphSvg-3"></div>
-      <MetaTags>
-        <meta name="Question" content={poll.poll_question} />
-      </MetaTags>
     </section>
   );
 };
