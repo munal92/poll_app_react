@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./scss/style.scss";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./scss/style.scss";
 import * as serviceWorker from "./serviceWorker";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router } from "react-router-dom";

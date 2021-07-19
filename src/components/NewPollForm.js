@@ -68,6 +68,7 @@ const NewPollForm = () => {
     });
     if (newPollQuestion.poll_question !== "" && fields[0].poll_answer !== "") {
       let createdPollID;
+
       setFormValidation({ ...formValidation, apiFetch: true });
       axiosHelper()
         .post(`/poll/createpoll`, newPollQuestion)
@@ -84,6 +85,7 @@ const NewPollForm = () => {
 
         .catch((err) => {
           console.error("error question post", err);
+          console.log("BURda", err);
           setFormValidation({
             ...formValidation,
             validated: true,
@@ -159,7 +161,7 @@ const NewPollForm = () => {
 
                 {fields.length !== 1 ? (
                   <Button
-                    onClick={() => handleRemove()}
+                    onClick={() => handleRemove(idx)}
                     className="mb-3 shadow-sm bg-white rounded"
                     as={InputGroup.Append}
                     style={{

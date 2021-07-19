@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NewPollForm from "./NewPollForm";
 import JoinForm from "./JoinForm";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import axiosHelper from "./utils/axiosHelper";
 const Home = () => {
+  useEffect(() => {
+    axiosHelper()
+      .get("/")
+      .then()
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   return (
     <section className="homeContainer">
       <Container>

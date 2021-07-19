@@ -134,7 +134,9 @@ const PollAnswers = (props) => {
         <Form.Group>
           <CopyToClipboard
             text={props.copyLink.value}
-            onCopy={() => props.setCopyLink({ copied: true })}
+            onCopy={() =>
+              props.setCopyLink({ ...props.copyLink, copied: true })
+            }
           >
             <Button
               onClick={() =>
